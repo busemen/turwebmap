@@ -47,16 +47,6 @@ a {
     z-index: -1;
 }
 
-#list-all {
-    position: absolute;
-    top: 10px;
-    bottom: 40px;
-    right: 10px;
-    background-color: white;
-    width: 300px;
-    overflow-y: auto;
-    border-radius: 5px;
-}
 
 #poi-details-modal {
     margin: 0 auto;
