@@ -25,6 +25,7 @@ p {
     margin: 10px;
     font-family: 'Segoe UI';
     font-style: normal;
+    text-align: justify;
 }
 
 a {
