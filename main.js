@@ -32,40 +32,61 @@ map.on("load", async () => {
             const poi = geojson
             // console.log(poi)
 
-            map.addSource("poi", {
-                type: 'geojson',
-                data: geojson
+            poi.features.forEach((marker) => {
+                // create a DOM element for the marker
+                // console.log(marker.properties.img.url)
+                const el = document.createElement('div');
+                el.className = 'marker';
+                el.style.backgroundImage =
+                    `url(${marker.properties.img.url}/)`;
+                el.style.width = `50px`;
+                el.style.height = `50px`;
+
+                // el.addEventListener('click', () => {
+                //     window.alert(marker.properties.message);
+                // });
+                // add marker to map
+                new maplibregl.Marker({ element: el })
+                    .setLngLat(marker.geometry.coordinates)
+                    .addTo(map);
             });
 
-            map.addLayer({
-                id: 'poi-layer',
-                source: 'poi',
-                type: 'symbol',
-                'layout': {
-                    'icon-image': [
-                        "match",
-                        ["get", "category"],
-                        "Театры", 'theatre-icon',
-                        "Библиотеки", 'library-icon',
-                        'other-icon'
-                    ],
-                    'icon-size': 0.05
-                }
 
-            });
 
-            poi.features.map((f) => {
-                document.getElementById(
-                    "list-all"
-                ).innerHTML += `<div class="list-item">
-                <h4>${f.properties["Name_poi"]}</h4>
-                <a href='#' onclick="map.flyTo({center: [${f.geometry.coordinates}], zoom: 12})">Найти на карте</a>
-                </div><hr>`;
-            })
+            // map.addSource("poi", {
+            //     type: 'geojson',
+            //     data: geojson
+            // });
+
+            // map.addLayer({
+            //     id: 'poi-layer',
+            //     source: 'poi',
+            //     type: 'symbol',
+            //     'layout': {
+            //         'icon-image': [
+            //             "match",
+            //             ["get", "category"],
+            //             "Театры", 'theatre-icon',
+            //             "Библиотеки", 'library-icon',
+            //             'other-icon'
+            //         ],
+            //         'icon-size': 0.05
+            //     }
+
+            // });
+
+            // poi.features.map((f) => {
+            //     document.getElementById(
+            //         "list-all"
+            //     ).innerHTML += `<div class="list-item">
+            //     <h4>${f.properties["Name_poi"]}</h4>
+            //     <a href='#' onclick="map.flyTo({center: [${f.geometry.coordinates}], zoom: 12})">Найти на карте</a>
+            //     </div><hr>`;
+            // })
 
         })
     map.on('click', 'poi-layer', (e) => {
-        // console.log(e.features[0].properties)
+        console.log(e.features[0].properties.img)
         poiProperty = e.features[0].properties
         renderPoiDetails(poiProperty)
         document.getElementById("poi-details-modal").style.display = "block";
