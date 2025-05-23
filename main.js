@@ -26,7 +26,8 @@ map.on("load", async () => {
     map.addImage('theatre-icon', theatre.data);
     map.addImage('other-icon', other.data);
 
-    fetch("./data.geojson")
+    // fetch("./data.geojson")
+    fetch("http://127.0.0.1:5000/poi")
         .then((responce) => responce.json())
         .then((geojson) => {
             const poi = geojson
@@ -54,14 +55,14 @@ map.on("load", async () => {
 
             });
 
-            poi.features.map((f) => {
-                document.getElementById(
-                    "list-all"
-                ).innerHTML += `<div class="list-item">
-                <h4>${f.properties["Name_poi"]}</h4>
-                <a href='#' onclick="map.flyTo({center: [${f.geometry.coordinates}], zoom: 12})">Найти на карте</a>
-                </div><hr>`;
-            })
+            // poi.features.map((f) => {
+            //     document.getElementById(
+            //         "list-all"
+            //     ).innerHTML += `<div class="list-item">
+            //     <h4>${f.properties["Name_poi"]}</h4>
+            //     <a href='#' onclick="map.flyTo({center: [${f.geometry.coordinates}], zoom: 12})">Найти на карте</a>
+            //     </div><hr>`;
+            // })
 
         })
     map.on('click', 'poi-layer', (e) => {
