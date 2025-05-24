@@ -26,8 +26,8 @@ map.on("load", async () => {
     map.addImage('theatre-icon', theatre.data);
     map.addImage('other-icon', other.data);
 
-    // fetch("./data.geojson")
-    fetch("http://127.0.0.1:5000/poi")
+    fetch("https://sambuk.pythonanywhere.com/poi")
+    // fetch("http://127.0.0.1:5000/poi")
         .then((responce) => responce.json())
         .then((geojson) => {
             const poi = geojson

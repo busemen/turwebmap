@@ -33,6 +33,7 @@ def poi_to_map():
     r = Response(
         json.dumps(geojson, ensure_ascii=False),
         mimetype="application/json",
-        headers={"Access-Control-Allow-Origin": "*"}
+        # headers={"Access-Control-Allow-Origin": "*"}
+        headers={"Access-Control-Allow-Origin": "https://busemen.github.io"}
     )
     return r
